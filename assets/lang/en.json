@@ -80,6 +80,8 @@
     "sale_items": "Sales",
     "posts": "Posts",
     "about_us": "About us",
+    "No posts":"No available posts for now!",
+    "Sorry no available post":"Sorry no available post for now, please check later",
     "cycles": "Cycles",
     "like": "Like",
     "comment": "Comment",

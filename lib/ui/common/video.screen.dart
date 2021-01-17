@@ -30,11 +30,7 @@ class _VideoScreenState extends State<VideoScreen>
 
   @override
   void initState() {
-    print("initState");
     super.initState();
-    print(widget.index);
-    print(widget.adVideo.video);
-
     _controller = VideoPlayerController.network(widget.adVideo.video)
       ..initialize().then((_) {
         _controller.play();
@@ -109,7 +105,7 @@ class _VideoScreenState extends State<VideoScreen>
                     child: Container(
                       color: Colors.transparent,
                       padding: EdgeInsets.all(10),
-                      child: Icon(Icons.arrow_back_ios) ,
+                      child: Icon(Icons.arrow_back_ios,color: Colors.white,),
                     ),
                   ),
                   Stack(
@@ -162,6 +158,7 @@ class _VideoScreenState extends State<VideoScreen>
   @override
   void dispose() {
     super.dispose();
+    _controller.pause();
     _controller.dispose();
     _animationController.dispose();
   }

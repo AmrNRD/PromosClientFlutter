@@ -47,8 +47,8 @@ AppTheme(String fontFamily){
     backgroundColor: AppColors.darkBackground,
     buttonColor: AppColors.buttonColor,
     cardColor: AppColors.darkCardColor,
-   primaryColorDark: AppColors.primaryColorDark,
-   canvasColor:AppColors.darkCanvasColor,
+    primaryColorDark: AppColors.primaryColorDark,
+    canvasColor: AppColors.darkCanvasColor,
     brightness: Brightness.dark,
     disabledColor: AppColors.white,
     cupertinoOverrideTheme: CupertinoThemeData(primaryColor: AppColors.primaryColor),
@@ -63,13 +63,13 @@ AppTheme(String fontFamily){
 
 
   static TextTheme lightTextTheme = TextTheme(
-    headline1: headline1.copyWith(color: AppColors.primaryColorDark),
-    headline2: headline2.copyWith(color: AppColors.customGreyLevels[100]),
+    headline1: headline1.copyWith(color: AppColors.customGreyLevels[59]),
+    headline2: headline2.copyWith(color: AppColors.customGreyLevels[50]),
     headline3: headline3.copyWith(color: AppColors.customGreyLevels[100]),
     headline4: headline4.copyWith(color: AppColors.customGreyLevels[100]),
     headline5: headline5.copyWith(color: AppColors.customGreyLevels[100]),
     button: button.copyWith(color: AppColors.customGreyLevels[100]),
-    caption: caption.copyWith(color: AppColors.customGreyLevels[100]),
+    caption: caption.copyWith(color: AppColors.customGreyLevels[200]),
     bodyText1: body.copyWith(color: AppColors.customGreyLevels[100]),
     bodyText2: bodySmall.copyWith(color: AppColors.customGreyLevels[100]),
     subtitle1: input.copyWith(color: AppColors.customGreyLevels[100]),

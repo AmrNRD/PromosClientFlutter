@@ -19,6 +19,7 @@ class SaleItemCard extends StatelessWidget {
       width: 250,
       decoration: BoxDecoration(
         color: Theme.of(context).cardColor,
+        borderRadius: BorderRadius.all(Radius.circular(20)),
         boxShadow: [
           BoxShadow(
             blurRadius: 20,
@@ -35,7 +36,7 @@ class SaleItemCard extends StatelessWidget {
           children: [
             //image stack
             Container(
-              margin: EdgeInsets.all(8),
+              margin: EdgeInsets.all(15),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [

@@ -7,14 +7,11 @@ import '../../../style/app.dimens.dart';
 
 class ProfileTagComponent extends StatelessWidget {
   final User user;
+  final bool showPoints;
 
-  const ProfileTagComponent({
-    Key key,
-    @required this.user,
-  }) : super(key: key);
+  const ProfileTagComponent({Key key, @required this.user, this.showPoints=true,}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    print(user.toJson());
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 24, vertical: 22),
       child: Column(
@@ -61,10 +58,7 @@ class ProfileTagComponent extends StatelessWidget {
                 style: Theme.of(context).textTheme.caption,
               ),
               SizedBox(height: 10),
-              Text(
-                AppLocalizations.of(context).translate("points",replacement: (user?.points??0).toString()),
-                style: Theme.of(context).textTheme.headline2,
-              ),
+              showPoints?Text(AppLocalizations.of(context).translate("points",replacement: (user?.points??0).toString()), style: Theme.of(context).textTheme.headline2):Container(),
             ],
           ),
         ],

@@ -88,6 +88,17 @@ class _PostsTabState extends State<PostsTab> {
               onPress: ()=>_postBloc.add(GetUserPastsEvent(widget.user)),
               buttonKey: "reload",
             ),
+          ):posts.isEmpty?Container(
+            margin: EdgeInsets.symmetric(vertical: 20),
+            child: GenericState(
+              size: 40,
+              margin: 8,
+              fontSize: 16,
+              removeButton: true,
+              imagePath: "assets/icons/box_icon.svg",
+              titleKey: AppLocalizations.of(context).translate("No posts"),
+              bodyKey: AppLocalizations.of(context).translate("Sorry no available post"),
+            ),
           ):ListView.builder(
             shrinkWrap: true,
             primary: false,
@@ -120,7 +131,7 @@ class _PostsTabState extends State<PostsTab> {
               return SafeArea(
                 child: FractionallySizedBox(
                   heightFactor: 0.9,
-                  child: CommentsSheet(selectedPost: selectedPost),
+                  child: CommentsSheet(selectedPost: selectedPost,profileUser: widget.user,),
                 ),
               );
             });

@@ -27,7 +27,7 @@ class _ShowProfilePageState extends State<ShowProfilePage> with SingleTickerProv
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              ProfileTagComponent(user: widget.user),
+              ProfileTagComponent(user: widget.user,showPoints: false),
               DefaultTabController(
                 length: 3,
                 child: Column(

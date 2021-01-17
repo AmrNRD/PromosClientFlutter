@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../main.dart';
 import 'comment.card.component.dart';
 import 'form.input.dart';
 
@@ -25,6 +26,8 @@ class _CommentsSheetState extends State<CommentsSheet> {
   void initState() {
     super.initState();
     _textEditingController=new TextEditingController();
+    print(Root.user.id);
+    print(widget.selectedPost.comments[1].user.id);
   }
   @override
   Widget build(BuildContext context) {
@@ -97,7 +100,7 @@ class _CommentsSheetState extends State<CommentsSheet> {
                   return DelayedAnimation(
                     child: Container(
                       margin: EdgeInsetsDirectional.only(bottom: index + 1 == widget.selectedPost.comments.length ? 0 : 24),
-                      child: CommentCardComponent(comment: widget.selectedPost.comments[index],insideTheProfile:widget.profileUser!=null&&widget.profileUser.id==widget.selectedPost.comments[index].id),
+                      child: CommentCardComponent(comment: widget.selectedPost.comments[index],insideTheProfile:(widget.profileUser!=null&&widget.profileUser.id==widget.selectedPost.comments[index].user.id)||Root?.user?.id==widget.selectedPost?.comments[index].user.id),
                     ),
                     delay: 150*index,
                   );

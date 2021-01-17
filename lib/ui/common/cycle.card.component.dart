@@ -1,4 +1,5 @@
 import 'package:PromoMeFlutter/data/models/cycle.dart';
+import 'package:PromoMeFlutter/utils/app.localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -17,13 +18,9 @@ class CycleCardComponent extends StatelessWidget {
         margin: EdgeInsets.symmetric(horizontal: 10),
         decoration: BoxDecoration(
           color: Theme.of(context).cardColor,
-          borderRadius: BorderRadius.all(Radius.circular(5)),
+          borderRadius: BorderRadius.all(Radius.circular(20)),
           boxShadow: [
-            BoxShadow(
-              offset: Offset(1, 1),
-              blurRadius: 5,
-              color: Colors.black.withOpacity(0.2),
-            ),
+            BoxShadow(offset: Offset(1, 1), blurRadius: 5, color: Colors.black.withOpacity(0.2)),
           ],
         ),
         child: Column(
@@ -53,12 +50,21 @@ class CycleCardComponent extends StatelessWidget {
                   ),
                   child:Icon(FontAwesomeIcons.film),
                 ),
-                Container(
-                  margin: EdgeInsets.only(bottom: 8),
-                  child: Text(
-                    cycle.name,
-                    style: Theme.of(context).textTheme.headline1,
-                  ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(bottom: 8),
+                      child: Text(
+                        cycle.name,
+                        style: Theme.of(context).textTheme.headline1,
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(bottom: 8),
+                      child: Text(AppLocalizations.of(context).translate("points",replacement: (cycle.points??0).toString()), style: Theme.of(context).textTheme.headline3),
+                    )
+                  ],
                 ),
               ],
 

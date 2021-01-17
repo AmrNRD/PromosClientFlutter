@@ -82,6 +82,7 @@
     "comment": "تعليق",
     "comments": "%s تعليق",
     "likes": "%s إعجاب",
-    "write_comment": "اكتب تعليق..."
-
+    "write_comment": "اكتب تعليق...",
+    "No posts":"لا يوجد مشاركات!",
+    "Sorry no available post":"عفوا لا يوجد مشاركات حاليا, قم بالعودة لاحقا"
 }

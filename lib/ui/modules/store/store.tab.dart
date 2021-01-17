@@ -88,23 +88,6 @@ class _StoreTabState extends State<StoreTab> {
                             },
                           ),
                       );
-//                  return Container(
-//                    alignment: Alignment.center,
-//                    child: Column(
-//                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                      children: <Widget>[
-//                        Text(AppLocalizations.of(context).translate("scan_me"),style: Theme.of(context).textTheme.headline1),
-//                        Text(AppLocalizations.of(context).translate("slogan"),style: Theme.of(context).textTheme.headline2),
-//                        SizedBox(height: 75),
-//                        QrImage(
-//                          data:state.qr,
-//                          version: QrVersions.auto,
-//                          size: screenAwareSize(320, context),
-//                        ),
-//                        SizedBox(height: 100),
-//                      ],
-//                    ),
-//                  );
                       }else if(state is SaleItemError){
                         return Container(
                           alignment: Alignment.center,
@@ -113,7 +96,7 @@ class _StoreTabState extends State<StoreTab> {
                             margin: 8,
                             fontSize: 16,
                             removeButton: false,
-                            imagePath: "assets/icons/sad.svg",
+                            imagePath: "assets/icons/box_icon.svg",
                             titleKey: AppLocalizations.of(context).translate("error_occurred",replacement: ""),
                             bodyKey: state.message,
                             onPress: ()=>BlocProvider.of<StoreBloc>(context).add(GetAllSaleItemsEvent()),
@@ -121,19 +104,7 @@ class _StoreTabState extends State<StoreTab> {
                           ),
                         );
                       }
-                      return Container(
-                        alignment: Alignment.center,
-                        child: GenericState(
-                          size: 180,
-                          margin: 8,
-                          fontSize: 16,
-                          removeButton: false,
-                          imagePath: "assets/icons/sad.svg",
-                          titleKey: AppLocalizations.of(context).translate("error_occurred",replacement: ""),
-                          onPress: ()=>BlocProvider.of<StoreBloc>(context).add(GetAllSaleItemsEvent()),
-                          buttonKey: "reload",
-                        ),
-                      );
+                      return Container();
                     },
                   ),
                 ),
