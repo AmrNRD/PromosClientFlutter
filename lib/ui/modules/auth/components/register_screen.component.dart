@@ -151,7 +151,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       underline: Container(),
                       value: _authData['city'],
                       dropdownColor: Theme.of(context).backgroundColor,
-                      hint: Text(AppLocalizations.of(context).translate("gender")) ,
+                      hint: Text(AppLocalizations.of(context).translate("city")) ,
                       items: [
                         DropdownMenuItem(child: Text("القاهرة"), value: 'Cairo'),
                         DropdownMenuItem(child: Text("الجيزة"), value: 'Giza'),
