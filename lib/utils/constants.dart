@@ -8,7 +8,7 @@ class Constants {
   static const mainPage = "/";
   static const authPage = "/authPage";
   static const homePage = "/homePage";
-  static const scanPage = "/scanPage";
+  static const profilePage = "/profilePage";
 
 
   // Keys

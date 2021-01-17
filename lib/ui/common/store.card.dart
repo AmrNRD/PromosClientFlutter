@@ -72,8 +72,9 @@ class SaleItemCard extends StatelessWidget {
                           softWrap: true,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.headline2.copyWith(fontSize: 20),
+                          style: Theme.of(context).textTheme.headline2.copyWith(fontSize: 13),
                         ),
+                        SizedBox(height: 4),
                         Text(
                           AppLocalizations.of(context).translate("currency", replacement: saleItem.price.toString()),
                           softWrap: true,
@@ -82,19 +83,19 @@ class SaleItemCard extends StatelessWidget {
                           style: Theme.of(context).textTheme.headline2.copyWith(color: Colors.grey),
                         ),
                         SizedBox(height: 7),
-                        Row(
+                        saleItem.user?.address!=null?Row(
                           children: [
                             SizedBox(height: 12, width: 12, child: SvgPicture.asset('assets/icons/location_icon.svg')),
                             SizedBox(width: 7),
                             Text(
-                              saleItem.user.address,
+                              saleItem.user?.address??"",
                               softWrap: true,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: Theme.of(context).textTheme.headline4.copyWith(color: Colors.grey),
                             ),
                           ],
-                        ),
+                        ):Container(),
                       ],
                     ),
                   ),

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:PromoMeFlutter/data/models/post_model.dart';
+import 'package:PromoMeFlutter/data/models/user_model.dart';
 import 'package:PromoMeFlutter/data/repositories/post_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
@@ -16,12 +17,22 @@ class PostBloc extends Bloc<PostEvent, PostState> {
   @override
   Stream<PostState> mapEventToState(PostEvent event) async* {
     try {
-      yield PostLoading();
       if (event is GetAllPastsEvent) {
-        List<Post>posts=await postRepository.getProfilePosts();
+        yield PostLoading();
+        List<Post>posts=await postRepository.getAllPosts();
+        yield PostsLoaded(posts);
+      }else if (event is LikeOrDislikePostEvent) {
+        Post updatedPost=await postRepository.likeOrDislikePost(event.post);
+        yield PostLoaded(updatedPost);
+      }else if (event is SendCommentPostEvent) {
+        Post updatedPost=await postRepository.commentPost(event.post, event.body);
+        yield PostLoaded(updatedPost);
+      }else if (event is GetUserPastsEvent) {
+        yield PostLoading();
+        List<Post>posts = await postRepository.profilePosts(event.user);
         yield PostsLoaded(posts);
       }
-    } catch (error) {
+      } catch (error) {
       yield PostError(error.toString());
     }
   }

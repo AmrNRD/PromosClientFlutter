@@ -12,6 +12,7 @@ class User {
   String mobile;
   String emailVerifiedAt;
   String image;
+  String aboutMe;
 
   User({
     this.id,
@@ -25,7 +26,8 @@ class User {
     this.long,
     this.mobile,
     this.points=0,
-    this.address
+    this.address,
+    this.aboutMe
   });
 
   factory User.fromJson(Map<String, dynamic> data) {
@@ -44,19 +46,33 @@ class User {
         city: data['city'],
         mobile:data['mobile'],
         points:int.tryParse(data['points'].toString()),
-        address: data['address']
+        address: data['address'],
+        aboutMe: data['about_me']
       );
   }
 
   Map<String, dynamic> toJson() => {
+    'id':id,
     'name': name,
     'email': email,
     'image': image,
+    'points':points,
+    'address':address,
+    'lat':lat,
+    'long':long,
+    'about_me':aboutMe,
     'email_verified_at':emailVerifiedAt
   };
 
   Map<String, dynamic> toUpdateJson() => {
     'name': name,
     'email': email,
+    'image': image,
+    'points':points,
+    'address':address,
+    'lat':lat,
+    'long':long,
+    'about_me':aboutMe
+
   };
 }

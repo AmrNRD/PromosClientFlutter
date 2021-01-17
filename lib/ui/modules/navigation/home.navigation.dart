@@ -52,8 +52,11 @@ class _HomeNavigationPageState extends State<HomeNavigationPage> with TickerProv
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: SafeArea(
         child: body[_currentSelectedTab],
+        right:false,
+        left: false,
+        bottom: false,
       ),
       bottomNavigationBar: ClipRRect(
         borderRadius: BorderRadius.only(topLeft: Radius.circular(25),topRight: Radius.circular(25)),
@@ -65,7 +68,7 @@ class _HomeNavigationPageState extends State<HomeNavigationPage> with TickerProv
           },
           child: AnimatedBottomNavigationBar(
             icons:[FontAwesomeIcons.home,FontAwesomeIcons.shoppingBag,FontAwesomeIcons.film, FontAwesomeIcons.user],
-            activeColor: Colors.blue,
+            activeColor: Theme.of(context).accentColor,
             backgroundColor: Theme.of(context).cardColor,
             inactiveColor: Theme.of(context).disabledColor,
             gapLocation: GapLocation.center,

@@ -1,8 +1,10 @@
+import 'package:PromoMeFlutter/data/models/user_model.dart';
 import 'package:PromoMeFlutter/ui/modules/auth/auth.page.dart';
 import 'package:PromoMeFlutter/ui/modules/navigation/home.navigation.dart';
 import 'package:PromoMeFlutter/ui/modules/splash/splash.page.dart';
 import 'package:PromoMeFlutter/ui/modules/store_details/store_details.page.dart';
 import 'package:PromoMeFlutter/ui/modules/verification/verification.screen.dart';
+import 'package:PromoMeFlutter/ui/modules/view_profile/profile.page.dart';
 import 'package:flutter/material.dart';
 
 import '../env.dart';
@@ -31,6 +33,13 @@ class RouteGenerator {
           settings: RouteSettings(name: Env.homePage),
           builder: (_) => HomeNavigationPage(),
         );
+      case Env.profilePage:
+        if(args is User)
+          return MaterialPageRoute(
+            settings: RouteSettings(name: Env.profilePage),
+            builder: (_) => ShowProfilePage(user: args),
+          );
+        return _errorRoute();
        case Env.saleItemPage:
         return MaterialPageRoute(
           settings: RouteSettings(name: Env.saleItemPage),

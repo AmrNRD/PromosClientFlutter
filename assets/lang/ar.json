@@ -1,5 +1,6 @@
 {
-    "app_name": "رالف - المخبز الالماني",
+    "app_name": "برومز مي",
+    "home": "الرئيسية",
     "choose_language": "اختر اللغة",
     "language_selection": "English",
     "email": "البريد الإلكتروني",
@@ -74,6 +75,13 @@
     "description": "التفاصيل",
     "sale_item_details": "تفاصيل المنتج",
     "sale_items": "عروض المنتجات",
-    "cycles": "الدوارات الاعلانيه"
+    "posts": "مشاركات",
+    "about_us": "عننا",
+    "cycles": "الدوارات الاعلانيه",
+    "like": "إعجاب",
+    "comment": "تعليق",
+    "comments": "%s تعليق",
+    "likes": "%s إعجاب",
+    "write_comment": "اكتب تعليق..."
 
 }

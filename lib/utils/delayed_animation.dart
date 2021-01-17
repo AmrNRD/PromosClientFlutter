@@ -16,12 +16,13 @@ class _DelayedAnimationState extends State<DelayedAnimation>
     with TickerProviderStateMixin {
   AnimationController _controller;
   Animation<Offset> _animOffset;
+  CurvedAnimation curve;
 
   @override
   void initState() {
 
     _controller = widget.animationController??AnimationController(vsync: this, duration: Duration(milliseconds: 800));
-    final curve = CurvedAnimation(curve: Curves.decelerate, parent: _controller);
+     curve = CurvedAnimation(curve: Curves.decelerate, parent: _controller);
     _animOffset = Tween<Offset>(begin: const Offset(0.0, 0.35), end: Offset.zero).animate(curve);
 
     if (widget.delay == null) {
@@ -44,8 +45,8 @@ class _DelayedAnimationState extends State<DelayedAnimation>
   @override
   Widget build(BuildContext context) {
     return FadeTransition(
-      child: SlideTransition(
-        position: _animOffset,
+      child: ScaleTransition(
+        scale:curve,
         child: widget.child,
       ),
       opacity: _controller,

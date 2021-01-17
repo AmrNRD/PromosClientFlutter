@@ -18,7 +18,7 @@ AppTheme(String fontFamily){
   ThemeData lightModeTheme=ThemeData(
     scaffoldBackgroundColor: Color(0xFFE5E5E5),
     primaryColor: AppColors.primaryColor,
-    accentColor: AppColors.primaryColorDark,
+    accentColor: AppColors.accentColor1,
     textTheme: AppTheme.lightTextTheme,
     fontFamily: Root.fontFamily,
     cursorColor: AppColors.primaryColor,
@@ -40,11 +40,12 @@ AppTheme(String fontFamily){
   ThemeData darkModeTheme=ThemeData(
     scaffoldBackgroundColor: AppColors.darkBackground,
     primaryColor: AppColors.primaryColor,
-    accentColor: AppColors.primaryColorDark,
+    accentColor: AppColors.accentColor1,
     textTheme: AppTheme.darkTextTheme,
     fontFamily: Root.fontFamily,
     cursorColor: AppColors.primaryColor,
     backgroundColor: AppColors.darkBackground,
+    buttonColor: AppColors.buttonColor,
     cardColor: AppColors.darkCardColor,
    primaryColorDark: AppColors.primaryColorDark,
    canvasColor:AppColors.darkCanvasColor,

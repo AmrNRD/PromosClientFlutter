@@ -1,5 +1,6 @@
 {
-    "app_name": "QR",
+    "app_name": "Promos me",
+    "home": "Home",
     "welcome": "Welcome",
     "choose_language": "Choose language",
     "language_selection": "العربية",
@@ -77,6 +78,13 @@
     "description": "Description",
     "sale_item_details": "Item details",
     "sale_items": "Sales",
-    "cycles": "Cycles"
+    "posts": "Posts",
+    "about_us": "About us",
+    "cycles": "Cycles",
+    "like": "Like",
+    "comment": "Comment",
+    "comments": "%s comments",
+    "likes": "%s likes",
+    "write_comment": "Write comment..."
 
 }

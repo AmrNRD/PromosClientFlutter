@@ -28,9 +28,9 @@ class AppColors {
     },
   );
 
-  static Color primaryColorDark = Color(0xFF153A6E);
+  static Color primaryColorDark = Color(0xFFB71C1C);
 
-  static Color primaryColor= Color(0xFF00ACFF);
+  static Color primaryColor= Color(0xFFD32F2F);
 
   static Color white = Color(0xFFFFFFFF);
 
@@ -38,9 +38,13 @@ class AppColors {
   static const Color darkBackground = Color(0xFF17262A);
 
 
-  static Color accentColor1 = Color(0xFF00ACFF);
+  static Color accentColor1 = Color(0xFFF0483D);
 
-  static Color cardColor=Color(0xFF5476A6);
+
+  static Color buttonColor = Color(0xFFf0a23d);
+
+
+  static Color cardColor=Color(0xFFF0483D);
 
   static Color successColor=Color(0xFF3DD598);
 
@@ -56,7 +60,6 @@ class AppColors {
 
   static Color darkCardColor=Color(0xFF364A54);
 
-  static Color buttonColor=Color(0xFF00ACFF);
 
   static Color flatColor=Color(0xFF9CB6DA);
 }

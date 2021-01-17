@@ -76,13 +76,13 @@ class _SaleItemDetailsPageState extends State<SaleItemDetailsPage> {
                         style: Theme.of(context).textTheme.headline2.copyWith(fontSize: 24),
                       ),
                       SizedBox(height: 8),
-                      Row(
+                      widget.saleItem.user?.address!=null?Row(
                         children: [
                           SizedBox(height: 12, width: 12, child: SvgPicture.asset('assets/icons/location_icon.svg')),
                           SizedBox(width: 7),
                           Expanded(
                             child: Text(
-                              widget.saleItem.user.address,
+                              widget.saleItem.user?.address??"",
                               softWrap: true,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
@@ -90,7 +90,7 @@ class _SaleItemDetailsPageState extends State<SaleItemDetailsPage> {
                             ),
                           ),
                         ],
-                      ),
+                      ):Container(),
                       SizedBox(height: 20),
                       Divider(
                         height: 2,
@@ -107,7 +107,7 @@ class _SaleItemDetailsPageState extends State<SaleItemDetailsPage> {
                         height: 10,
                       ),
                       Text(
-                        widget.saleItem.description,
+                        widget.saleItem?.description??"",
                         style: Theme.of(context).textTheme.bodyText1,
                       ),
                     ],

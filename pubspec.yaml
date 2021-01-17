@@ -66,6 +66,8 @@ dependencies:
   animated_bottom_navigation_bar: ^0.1.2+2
   fl_chart: ^0.11.1
   qr_flutter: ^3.2.0
+  flutter_animated_theme: ^0.9.0
+
 
   flutter_stories: ^0.2.1+1
   video_player: 0.11.1+5
@@ -78,6 +80,11 @@ dependencies:
 dev_dependencies:
   flutter_launcher_icons: ^0.7.5
   build_runner: any
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/logo.png"
 
 flutter:
 

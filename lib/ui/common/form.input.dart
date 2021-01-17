@@ -40,6 +40,7 @@ class FormInputField extends StatefulWidget {
 }
 
 class _FormInputFieldState extends State<FormInputField> {
+
   @override
   void initState() {
     super.initState();
@@ -84,11 +85,11 @@ class _FormInputFieldState extends State<FormInputField> {
         },
         decoration: InputDecoration(
           icon: widget.prefixIcon,
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(30),borderSide: BorderSide.none),
-          focusedBorder:  OutlineInputBorder(borderRadius: BorderRadius.circular(30),borderSide: BorderSide.none),
+          border: OutlineInputBorder(borderSide: BorderSide.none),
+          focusedBorder:  OutlineInputBorder(borderSide: BorderSide.none),
           fillColor:Theme.of(context).cardColor,
           filled: true,
-          hintText: AppLocalizations.of(context).translate(widget.title,defaultText: widget.title),
+          hintText: AppLocalizations.of(context).translate(widget.hint??widget.title,defaultText: widget.hint??widget.title),
           suffixIcon:widget.suffixIcon,
         ),
       ),

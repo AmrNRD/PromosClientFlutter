@@ -2,6 +2,7 @@ import 'package:PromoMeFlutter/data/models/ad_video.dart';
 import 'package:PromoMeFlutter/ui/common/video_stories.dart';
 import 'package:PromoMeFlutter/utils/core.util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -99,6 +100,18 @@ class _VideoScreenState extends State<VideoScreen>
           start: 10,
           child: Row(
             children: [
+                  GestureDetector(
+                    onTap: (){
+                      _controller.pause();
+                      SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(
+                      color: Colors.transparent,
+                      padding: EdgeInsets.all(10),
+                      child: Icon(Icons.arrow_back_ios) ,
+                    ),
+                  ),
                   Stack(
                     alignment: Alignment.center,
                     children: <Widget>[

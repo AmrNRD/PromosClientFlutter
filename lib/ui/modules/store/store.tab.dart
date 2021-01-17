@@ -68,23 +68,26 @@ class _StoreTabState extends State<StoreTab> {
                           );
                           return Container();
                         }else
-                      return  GridView.builder(
-                          shrinkWrap: true,
-                          physics: BouncingScrollPhysics(),
-                          itemCount: state.saleItems.length,
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            childAspectRatio:0.6,
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 10,
+                      return  Container(
+                        margin: EdgeInsets.symmetric(horizontal: 10),
+                        child: GridView.builder(
+                            shrinkWrap: true,
+                            physics: BouncingScrollPhysics(),
+                            itemCount: state.saleItems.length,
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              childAspectRatio:0.58,
+                              crossAxisSpacing: 10,
+                              mainAxisSpacing: 10,
+                            ),
+                            itemBuilder: (BuildContext context, int index) {
+                              return DelayedAnimation(
+                                child: SaleItemCard(saleItem: state.saleItems[index]),
+                                delay: 200*(index+1),
+                              );
+                            },
                           ),
-                          itemBuilder: (BuildContext context, int index) {
-                            return DelayedAnimation(
-                              child: SaleItemCard(saleItem: state.saleItems[index]),
-                              delay: 200*(index+1),
-                            );
-                          },
-                        );
+                      );
 //                  return Container(
 //                    alignment: Alignment.center,
 //                    child: Column(
