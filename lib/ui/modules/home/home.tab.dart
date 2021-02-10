@@ -70,9 +70,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
                       });
                     } else if (state is PostLoaded) {
                       setState(() {
-                        print(state.post.id);
-                        print(state.post.content);
-                        print(state.post.likedByMe);
+
                         isLoading = false;
                         int index = posts.indexWhere(
                             (element) => element.id == state.post.id);
@@ -106,18 +104,14 @@ class _HomeTabPageState extends State<HomeTabPage> {
                                 margin: 8,
                                 fontSize: 16,
                                 removeButton: false,
-                                imagePath: "assets/icons/sad.svg",
-                                titleKey: AppLocalizations.of(context)
-                                    .translate("error_occurred",
-                                        replacement: ""),
+                                imagePath: "assets/icons/box_icon.svg",
+                                titleKey: AppLocalizations.of(context).translate("error_occurred", replacement: ""),
                                 bodyKey: errorMessage,
-                                onPress: () =>
-                                    BlocProvider.of<PostBloc>(context)
-                                        .add(GetAllPastsEvent()),
+                                onPress: () => BlocProvider.of<PostBloc>(context).add(GetAllPastsEvent()),
                                 buttonKey: "reload",
                               ),
                             )
-                          : ListView.builder(
+                      :posts.isNotEmpty?  ListView.builder(
                               shrinkWrap: true,
                               primary: false,
                               itemCount: posts.length,
@@ -139,8 +133,19 @@ class _HomeTabPageState extends State<HomeTabPage> {
                                   ),
                                   delay: 150 * index,
                                 );
-                              },
-                            ),
+                              },) : Container(
+                                  margin: EdgeInsets.symmetric(vertical: 20),
+                                  child: GenericState(
+                                    size: 40,
+                                    margin: 8,
+                                    fontSize: 16,
+                                    removeButton: true,
+                                    imagePath: "assets/icons/box_icon.svg",
+                                    titleKey: AppLocalizations.of(context).translate("No posts!", defaultText: "No posts!"),
+                                    bodyKey: AppLocalizations.of(context).translate(
+                                        "There is no posts at the moment"),
+                                  ),
+                                ),
                 ),
               ),
             ],

@@ -87,6 +87,9 @@
     "comment": "Comment",
     "comments": "%s comments",
     "likes": "%s likes",
-    "write_comment": "Write comment..."
+    "write_comment": "Write comment...",
+    "No posts!": "No posts!",
+    "There is no posts at the moment": "There is no posts at the moment"
+
 
 }

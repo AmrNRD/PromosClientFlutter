@@ -84,5 +84,7 @@
     "likes": "%s إعجاب",
     "write_comment": "اكتب تعليق...",
     "No posts":"لا يوجد مشاركات!",
-    "Sorry no available post":"عفوا لا يوجد مشاركات حاليا, قم بالعودة لاحقا"
+    "Sorry no available post":"عفوا لا يوجد مشاركات حاليا, قم بالعودة لاحقا",
+    "No posts!": "لا يوجد مشاركات !",
+    "There is no posts at the moment": "لا يوجد مشاركات في الوقت الحالي"
 }
