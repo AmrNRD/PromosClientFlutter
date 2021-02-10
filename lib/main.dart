@@ -60,7 +60,7 @@ class _RootState extends State<Root> {
     settingsBloc=SettingsBloc(SettingsDataRepository());
     settingsBloc.add(LoadSettings());
 
-    Root.firebaseToken =await SetUp.setUpFirebaseConfig(context);
+    // Root.firebaseToken =await SetUp.setUpFirebaseConfig(context);
   }
 
   changeFont(Locale locale){

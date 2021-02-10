@@ -141,7 +141,7 @@ class _VideoScreenState extends State<VideoScreen>
                 ],
               ),
       ),
-        Positioned(
+        widget.adVideo.link!=null? Positioned(
             bottom: 10,
             left: 0,
             right: 0,
@@ -150,7 +150,7 @@ class _VideoScreenState extends State<VideoScreen>
                   await launch(widget.adVideo.link);
             },
             child: Icon(Icons.keyboard_arrow_up,size: 120,color: Colors.white))
-        ),
+        ):Container(),
       ],
     );
   }

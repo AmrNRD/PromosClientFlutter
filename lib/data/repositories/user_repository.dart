@@ -124,7 +124,7 @@ class UserDataRepository implements UserRepository {
 
   @override
   Future<User> signUp(String name,String email, String password, String platform, String firebaseToken, String mobile, String city, String gender, double lat, double long, String avater) async {
-    final responseData = await APICaller.postData("/auth/signup", body: {"name":name,"mobile":mobile,"email":email, "password":password,"firebase_token":firebaseToken,"city":city,"gender":gender,"lat":lat,"long":long,"avater":avater, "platform":platform,"type":"admin"});
+    final responseData = await APICaller.postData("/auth/signup", body: {"name":name,"mobile":mobile,"email":email, "password":password,"firebase_token":firebaseToken,"city":city,"gender":gender,"lat":lat,"long":long,"avater":avater, "platform":platform,"type":"user"});
     User user = User.fromJson(responseData['user']);
     DateTime _expiryDate = DateTime.parse(responseData['expires_at']);
     final prefs = await SharedPreferences.getInstance();

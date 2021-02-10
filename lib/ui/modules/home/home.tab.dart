@@ -53,7 +53,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
               Container(
                 alignment: AlignmentDirectional.centerStart,
                 margin: EdgeInsets.symmetric(horizontal: 30,vertical: 30),
-                child: Text(AppLocalizations.of(context).translate("home"),style: Theme.of(context).textTheme.headline1,),
+                child: Text(AppLocalizations.of(context).translate("home"),style: Theme.of(context).textTheme.headline1),
               ),
               Container(
                 margin: EdgeInsetsDirectional.only(top: 10),

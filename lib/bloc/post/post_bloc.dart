@@ -27,10 +27,12 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       }else if (event is SendCommentPostEvent) {
         Post updatedPost=await postRepository.commentPost(event.post, event.body);
         yield PostLoaded(updatedPost);
-      }else if (event is GetUserPastsEvent) {
-        yield PostLoading();
-        List<Post>posts = await postRepository.profilePosts(event.user);
-        yield PostsLoaded(posts);
+      }else if (event is AddPostEvent) {
+        Post updatedPost=await postRepository.addPost(event.post);
+        yield PostLoaded(updatedPost);
+      }else if (event is DeletePostEvent) {
+        await postRepository.deletePost(event.post);
+        yield PostDeleted();
       }
       } catch (error) {
       yield PostError(error.toString());

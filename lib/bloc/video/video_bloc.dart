@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:PromoMeFlutter/data/models/ad_video.dart';
 import 'package:PromoMeFlutter/data/models/cycle_video.dart';
 import 'package:PromoMeFlutter/data/repositories/video_repository.dart';
 import 'package:bloc/bloc.dart';

@@ -54,9 +54,7 @@ AppTheme(String fontFamily){
     cupertinoOverrideTheme: CupertinoThemeData(primaryColor: AppColors.primaryColor),
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: EdgeInsets.all(10),
-      focusedBorder: UnderlineInputBorder(
-        borderSide: BorderSide(color: AppColors.primaryColor, width: 1),
-      ),
+      focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.primaryColor, width: 1)),
       errorStyle: lightTextTheme.subtitle2.copyWith(color: Colors.red),
     ),
   );

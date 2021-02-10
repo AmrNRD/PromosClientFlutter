@@ -75,7 +75,7 @@ class _StoreTabPageState extends State<StoreTabPage> {
                     margin: 8,
                     fontSize: 16,
                     removeButton: false,
-                    imagePath: "assets/icons/sad.svg",
+                    imagePath: "assets/icons/box_icon.svg",
                     titleKey: AppLocalizations.of(context).translate("error_occurred",replacement: ""),
                     onPress: ()=>BlocProvider.of<PostBloc>(context).add(GetAllPastsEvent()),
                     buttonKey: "reload",

@@ -1,6 +1,7 @@
 
 import 'dart:convert';
 
+import 'package:PromoMeFlutter/data/models/ad_video.dart';
 import 'package:PromoMeFlutter/data/models/cycle.dart';
 import 'package:PromoMeFlutter/data/models/cycle_video.dart';
 import 'package:PromoMeFlutter/data/models/post_model.dart';

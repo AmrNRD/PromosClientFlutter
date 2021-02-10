@@ -7,6 +7,11 @@ class VideoInitial extends VideoState {}
 
 class VideoLoading extends VideoState {}
 
+class VideoLoaded extends VideoState {
+  final AdVideo video;
+  VideoLoaded(this.video);
+}
+
 class VideoWatchedSuccessfully extends VideoState {}
 
 class VideoError extends VideoState {

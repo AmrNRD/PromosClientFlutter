@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'dart:math';
-import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,35 +23,35 @@ class SetUp {
 
 
   //------------------------------Firebase------------------------------
-  static Future<String> setUpFirebaseConfig(BuildContext buildContext) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    context = buildContext;
-    //----firebase config----
-    if(sharedPreferences.containsKey('firebaseToken')) {
-      FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
-      firebaseMessaging.configure(
-        onMessage: (Map<String, dynamic> message) async {
-          debugPrint("firebase onMessage: $message");
-        },
-        onBackgroundMessage: null,
-        onLaunch: (Map<String, dynamic> message) async {
-          debugPrint("firebase onLaunch: $message");
-        },
-        onResume: (Map<String, dynamic> message) async {
-          debugPrint("firebase onResume: $message");
-        },
-      );
-      firebaseMessaging.requestNotificationPermissions(const IosNotificationSettings(sound: true, badge: true, alert: true, provisional: true));
-      firebaseMessaging.onIosSettingsRegistered.listen((IosNotificationSettings settings) {
-        debugPrint("firebase Settings registered: $settings");
-      });
-      String token = await firebaseMessaging.getToken();
-      sharedPreferences.setString("firebaseToken", token);
-      return token;
-    }else{
-      return sharedPreferences.getString('firebaseToken');
-    }
-  }
+  // static Future<String> setUpFirebaseConfig(BuildContext buildContext) async {
+  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  //   context = buildContext;
+  //   //----firebase config----
+  //   if(sharedPreferences.containsKey('firebaseToken')) {
+  //     FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
+  //     firebaseMessaging.configure(
+  //       onMessage: (Map<String, dynamic> message) async {
+  //         debugPrint("firebase onMessage: $message");
+  //       },
+  //       onBackgroundMessage: null,
+  //       onLaunch: (Map<String, dynamic> message) async {
+  //         debugPrint("firebase onLaunch: $message");
+  //       },
+  //       onResume: (Map<String, dynamic> message) async {
+  //         debugPrint("firebase onResume: $message");
+  //       },
+  //     );
+  //     firebaseMessaging.requestNotificationPermissions(const IosNotificationSettings(sound: true, badge: true, alert: true, provisional: true));
+  //     firebaseMessaging.onIosSettingsRegistered.listen((IosNotificationSettings settings) {
+  //       debugPrint("firebase Settings registered: $settings");
+  //     });
+  //     String token = await firebaseMessaging.getToken();
+  //     sharedPreferences.setString("firebaseToken", token);
+  //     return token;
+  //   }else{
+  //     return sharedPreferences.getString('firebaseToken');
+  //   }
+  // }
 
   static onBackGroundHandling(Map<String, dynamic> message) {
     if (message.containsKey('data')) {

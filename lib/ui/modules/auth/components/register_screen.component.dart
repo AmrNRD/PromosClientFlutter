@@ -5,7 +5,7 @@ import 'package:PromoMeFlutter/bloc/user/user_bloc.dart';
 import 'package:PromoMeFlutter/ui/common/custom_raised_button.dart';
 import 'package:PromoMeFlutter/ui/common/form.input.dart';
 import 'package:PromoMeFlutter/utils/validators.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,7 +31,7 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
 
   String platform;
-  FirebaseMessaging firebaseMessaging;
+  // FirebaseMessaging firebaseMessaging;
   String firebaseToken;
 
 
@@ -53,12 +53,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
   void initState() {
     platform = Platform.isIOS ? "IOS" : "Android";
     firebaseToken = "";
-    firebaseMessaging = new FirebaseMessaging();
-    firebaseMessaging.getToken().then((String token) {
-      assert(token != null);
-      firebaseToken = token;
-      SharedPreferences.getInstance().then((sharedPreferences) => sharedPreferences.setString("firebaseToken", firebaseToken));
-    });
+    // firebaseMessaging = new FirebaseMessaging();
+    // firebaseMessaging.getToken().then((String token) {
+    //   assert(token != null);
+    //   firebaseToken = token;
+    //   SharedPreferences.getInstance().then((sharedPreferences) => sharedPreferences.setString("firebaseToken", firebaseToken));
+    // });
 
     super.initState();
   }
