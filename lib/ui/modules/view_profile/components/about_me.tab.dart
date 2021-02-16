@@ -1,3 +1,4 @@
+import 'package:PromoMeFlutter/utils/app.localization.dart';
 import 'package:flutter/material.dart';
 
 class AboutMeTab extends StatelessWidget {
@@ -22,7 +23,7 @@ class AboutMeTab extends StatelessWidget {
               ),
             ],
           ),
-          child: Text(aboutMe??"",style: Theme.of(context).textTheme.headline3),
+          child: Text(aboutMe??AppLocalizations.of(context).translate("No details"),style: Theme.of(context).textTheme.headline3),
         ),
       ],
     );

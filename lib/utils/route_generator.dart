@@ -1,11 +1,14 @@
 import 'package:PromoMeFlutter/data/models/user_model.dart';
 import 'package:PromoMeFlutter/ui/modules/auth/auth.page.dart';
+import 'package:PromoMeFlutter/ui/modules/edit_profile/edit_profile_page.dart';
 import 'package:PromoMeFlutter/ui/modules/navigation/home.navigation.dart';
+import 'package:PromoMeFlutter/ui/modules/sidemenu/side.menu.page.dart';
 import 'package:PromoMeFlutter/ui/modules/splash/splash.page.dart';
 import 'package:PromoMeFlutter/ui/modules/store_details/store_details.page.dart';
 import 'package:PromoMeFlutter/ui/modules/verification/verification.screen.dart';
 import 'package:PromoMeFlutter/ui/modules/view_profile/profile.page.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 import '../env.dart';
 
@@ -40,6 +43,17 @@ class RouteGenerator {
             builder: (_) => ShowProfilePage(user: args),
           );
         return _errorRoute();
+      case Env.sideMenuPage:
+        return PageTransition(
+            settings: RouteSettings(name: Env.sideMenuPage),
+            child:SideMenuPage(),
+            type: PageTransitionType.rightToLeft
+        );
+      case Env.editPage:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: Env.editPage),
+          builder: (_) => EditProfilePage(),
+        );
        case Env.saleItemPage:
         return MaterialPageRoute(
           settings: RouteSettings(name: Env.saleItemPage),

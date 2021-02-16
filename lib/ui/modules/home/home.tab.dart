@@ -4,6 +4,7 @@ import 'package:PromoMeFlutter/bloc/post/post_bloc.dart';
 import 'package:PromoMeFlutter/data/models/post_model.dart';
 import 'package:PromoMeFlutter/ui/common/comment.card.component.dart';
 import 'package:PromoMeFlutter/ui/common/comments_sheets.dart';
+import 'package:PromoMeFlutter/ui/common/custom_appbar.dart';
 import 'package:PromoMeFlutter/ui/common/form.input.dart';
 import 'package:PromoMeFlutter/ui/common/genearic.state.component.dart';
 import 'package:PromoMeFlutter/ui/common/post.card.component.dart';
@@ -17,7 +18,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loading_indicator_view/loading_indicator_view.dart';
-import 'package:qr_flutter/qr_flutter.dart';
+import 'package:shimmer/shimmer.dart';
 
 
 class HomeTabPage extends StatefulWidget {
@@ -29,7 +30,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
 
   List<Post>posts=[];
   Post selectedPost;
-  bool isLoading=false;
+  bool isLoading=true;
   bool isError=false;
   String errorMessage="";
   PersistentBottomSheetController _controller;
@@ -46,15 +47,15 @@ class _HomeTabPageState extends State<HomeTabPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
+      appBar: CustomAppBar(
+        actionButtons: [
+
+        ],
+      ),
       backgroundColor: Theme.of(context).backgroundColor,
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
-                alignment: AlignmentDirectional.centerStart,
-                margin: EdgeInsets.symmetric(horizontal: 30,vertical: 30),
-                child: Text(AppLocalizations.of(context).translate("home"),style: Theme.of(context).textTheme.headline1),
-              ),
               Container(
                 margin: EdgeInsetsDirectional.only(top: 10),
                 child: BlocListener<PostBloc, PostState>(
@@ -92,10 +93,18 @@ class _HomeTabPageState extends State<HomeTabPage> {
                   },
                   child: isLoading
                       ? Container(
-                          margin: EdgeInsets.all(30),
-                          alignment: Alignment.center,
-                          child: SemiCircleSpinIndicator(
-                              color: Theme.of(context).accentColor))
+                    margin: EdgeInsets.all(30),
+                    alignment: Alignment.center,
+                    child: Shimmer.fromColors(
+                      baseColor: AppColors.primaryColor,
+                      highlightColor: AppColors.white,
+                      child: Image.asset(
+                        "assets/images/logo2.png",
+                        height: screenAwareSize(70, context),
+                        width: screenAwareWidth(70, context),
+                      ),
+                    ),
+                  )
                       : isError
                           ? Container(
                               alignment: Alignment.center,
@@ -142,8 +151,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
                                     removeButton: true,
                                     imagePath: "assets/icons/box_icon.svg",
                                     titleKey: AppLocalizations.of(context).translate("No posts!", defaultText: "No posts!"),
-                                    bodyKey: AppLocalizations.of(context).translate(
-                                        "There is no posts at the moment"),
+                                    bodyKey: AppLocalizations.of(context).translate("There is no posts at the moment"),
                                   ),
                                 ),
                 ),

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:PromoMeFlutter/data/models/sale_item.dart';
+import 'package:PromoMeFlutter/ui/modules/sidemenu/components/side.menu.button.dart';
 import 'package:PromoMeFlutter/utils/app.localization.dart';
 import 'package:PromoMeFlutter/utils/dots_indicator.dart';
 import 'package:PromoMeFlutter/utils/sizeConfig.dart';
@@ -62,54 +63,17 @@ class _SaleItemDetailsPageState extends State<SaleItemDetailsPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 30),
-                      Text(
-                        AppLocalizations.of(context).translate("currency", replacement: widget.saleItem.price.toString()),
-                        softWrap: true,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.headline2.copyWith(color: Colors.grey),
-                      ),
-                      SizedBox(height: 12),
+                      SizedBox(height: 40),
                       Text(
                         widget.saleItem.title,
                         style: Theme.of(context).textTheme.headline2.copyWith(fontSize: 24),
                       ),
-                      SizedBox(height: 8),
-                      widget.saleItem.user?.address!=null?Row(
-                        children: [
-                          SizedBox(height: 12, width: 12, child: SvgPicture.asset('assets/icons/location_icon.svg')),
-                          SizedBox(width: 7),
-                          Expanded(
-                            child: Text(
-                              widget.saleItem.user?.address??"",
-                              softWrap: true,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: Theme.of(context).textTheme.headline4.copyWith(color: Colors.grey),
-                            ),
-                          ),
-                        ],
-                      ):Container(),
-                      SizedBox(height: 20),
-                      Divider(
-                        height: 2,
-                        color: Colors.grey,
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        AppLocalizations.of(context).translate("description"),
-                        style: Theme.of(context).textTheme.headline2,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        widget.saleItem?.description??"",
-                        style: Theme.of(context).textTheme.bodyText1,
-                      ),
+                      SideMenuButton(icon:"assets/icons/price_tag.svg",title: "currency",subTitle: "",onTap: null,replacement: widget.saleItem.price.toString()),
+                      Divider(thickness: 1),
+                      widget.saleItem.user?.address!=null?SideMenuButton(icon:"assets/icons/location_icon.svg",title: widget.saleItem.user?.address??"",subTitle: "",onTap: null):Container(),
+                      widget.saleItem?.user?.address!=null?Divider(thickness: 1):Container(),
+                      widget.saleItem?.description!=null?SideMenuButton(icon:"assets/icons/category_icon.svg",title: widget.saleItem.description,subTitle: "",onTap: null):Container(),
+
                     ],
                   ),
                 ),
@@ -215,15 +179,6 @@ class _FlexibleHeaderState extends State<DetailsHeader> {
               ),
             ),
             actions: [
-              Container(
-                padding: EdgeInsets.all(8),
-                child: SvgPicture.asset(
-                  "assets/icons/share_icon.svg",
-                  color: Colors.white,
-                  height: 16,
-                  width: 16,
-                ),
-              )
             ],
             leading: InkWell(
                 onTap: () {
@@ -286,14 +241,13 @@ class _FlexibleHeaderState extends State<DetailsHeader> {
                             end: 2.5 * SizeConfig.widthMultiplier,
                           ),
                           child: Opacity(
-                            opacity: state.opacityFlexible < 0.05
-                                ? 0.0
-                                : state.opacityFlexible,
+                            opacity: state.opacityFlexible < 0.05 ? 0.0 : state.opacityFlexible,
                             child: Row(
                               children: [
                                 Container(
                                     decoration: BoxDecoration(
                                       color: Colors.white,
+                                      borderRadius: BorderRadius.circular(20),
                                       boxShadow: [
                                         BoxShadow(
                                           blurRadius: 20,
@@ -304,13 +258,15 @@ class _FlexibleHeaderState extends State<DetailsHeader> {
                                     ),
                                     height: 90,
                                     width: 90,
-                                    padding: EdgeInsets.all(14),
-                                    child:  CachedNetworkImage(
-                                      imageUrl: widget.saleItem.user.image??Env.dummyProfilePic,
-                                      fit: BoxFit.fill,
-                                      height: 90,
-                                      width: 90,
-                                      errorWidget: (context, url, error) => CachedNetworkImage(imageUrl: Env.dummyProfilePic),
+                                    child:  ClipRRect(
+                                      borderRadius: BorderRadius.circular(20),
+                                      child: CachedNetworkImage(
+                                        imageUrl: widget.saleItem.user.image??Env.dummyProfilePic,
+                                        fit: BoxFit.fill,
+                                        height: 90,
+                                        width: 90,
+                                        errorWidget: (context, url, error) => CachedNetworkImage(imageUrl: Env.dummyProfilePic),
+                                      ),
                                     )
                                 )
                               ],

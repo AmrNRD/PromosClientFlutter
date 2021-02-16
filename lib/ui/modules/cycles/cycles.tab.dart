@@ -2,6 +2,7 @@ import 'package:PromoMeFlutter/bloc/cycle/cycle_bloc.dart';
 import 'package:PromoMeFlutter/bloc/video/video_bloc.dart';
 import 'package:PromoMeFlutter/data/models/cycle.dart';
 import 'package:PromoMeFlutter/data/models/cycle_video.dart';
+import 'package:PromoMeFlutter/ui/common/custom_appbar.dart';
 import 'package:PromoMeFlutter/ui/common/cycle.card.component.dart';
 import 'package:PromoMeFlutter/ui/common/genearic.state.component.dart';
 import 'package:PromoMeFlutter/ui/common/video.screen.dart';
@@ -15,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_stories/flutter_stories.dart';
 import 'package:loading_indicator_view/loading_indicator_view.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../main.dart';
 
@@ -38,16 +40,12 @@ class _CyclesTabState extends State<CyclesTab> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
+        appBar: CustomAppBar(),
         body: SafeArea(
           child: SingleChildScrollView(
             child: Container(
               child:Column(
                 children: [
-                  SizedBox(height: 20),
-                  Text(
-                    AppLocalizations.of(context).translate("cycles"),
-                    style: Theme.of(context).textTheme.headline1.copyWith(fontWeight: FontWeight.w500),
-                  ),
                   SizedBox(height: 20),
                   BlocListener<CycleBloc,CycleState>(
                     listener: (context,state){
@@ -61,7 +59,15 @@ class _CyclesTabState extends State<CyclesTab> {
                     child: BlocBuilder<CycleBloc,CycleState>(
                       builder: (context,state){
                         if(state is CycleLoading){
-                          return Container(margin: EdgeInsets.all(30),alignment: Alignment.center,child: SemiCircleSpinIndicator(color: Theme.of(context).accentColor));
+                          return Container(margin: EdgeInsets.all(30),alignment: Alignment.center,child: Shimmer.fromColors(
+                            baseColor: AppColors.primaryColor,
+                            highlightColor: AppColors.white,
+                            child: Image.asset(
+                              "assets/images/logo2.png",
+                              height: screenAwareSize(70, context),
+                              width: screenAwareWidth(70, context),
+                            ),
+                          ),);
                         } else if(state is CyclesLoaded){
                           if (state.cycles.isEmpty) {
                             return Container(
@@ -105,7 +111,7 @@ class _CyclesTabState extends State<CyclesTab> {
                               margin: 8,
                               fontSize: 16,
                               removeButton: false,
-                              imagePath: "assets/icons/sad.svg",
+                              imagePath: "assets/icons/box_icon.svg",
                               titleKey: AppLocalizations.of(context).translate("error_occurred",replacement: ""),
                               bodyKey: state.message,
                               onPress: ()=>BlocProvider.of<CycleBloc>(context).add(GetAllCyclesEvent()),
@@ -120,7 +126,7 @@ class _CyclesTabState extends State<CyclesTab> {
                             margin: 8,
                             fontSize: 16,
                             removeButton: false,
-                            imagePath: "assets/icons/sad.svg",
+                            imagePath: "assets/icons/box_icon.svg",
                             titleKey: AppLocalizations.of(context).translate("error_occurred",replacement: ""),
                             onPress: ()=>BlocProvider.of<CycleBloc>(context).add(GetAllCyclesEvent()),
                             buttonKey: "reload",

@@ -4,7 +4,7 @@ import 'package:PromoMeFlutter/ui/modules/home/home.tab.dart';
 import 'package:PromoMeFlutter/ui/modules/profile/profile.page.dart';
 import 'package:PromoMeFlutter/ui/modules/store/store.tab.dart';
 import 'package:PromoMeFlutter/ui/style/app.colors.dart';
-import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:PromoMeFlutter/utils/app.localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,6 +14,7 @@ import '../../../env.dart';
 import '../home/home.tab.dart';
 
 class HomeNavigationPage extends StatefulWidget {
+  static GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   _HomeNavigationPageState createState() => _HomeNavigationPageState();
 }
@@ -39,7 +40,6 @@ class _HomeNavigationPageState extends State<HomeNavigationPage> with TickerProv
     HomeTabPage(),
     StoreTab(),
     CyclesTab(),
-    ProfileTab(),
   ];
   int _currentSelectedTab = 0;
 
@@ -52,33 +52,41 @@ class _HomeNavigationPageState extends State<HomeNavigationPage> with TickerProv
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: body[_currentSelectedTab],
-        right:false,
-        left: false,
-        bottom: false,
-      ),
-      bottomNavigationBar: ClipRRect(
-        borderRadius: BorderRadius.only(topLeft: Radius.circular(25),topRight: Radius.circular(25)),
-        child:  BlocListener<UserBloc,UserState>(
-          listener: (context,state){
-            if(state is UserLoggedOut){
-              Navigator.pushReplacementNamed(context, Env.authPage);
-            }
-          },
-          child: AnimatedBottomNavigationBar(
-            icons:[FontAwesomeIcons.home,FontAwesomeIcons.shoppingBag,FontAwesomeIcons.film, FontAwesomeIcons.user],
-            activeColor: Theme.of(context).accentColor,
-            backgroundColor: Theme.of(context).cardColor,
-            inactiveColor: Theme.of(context).disabledColor,
-            gapLocation: GapLocation.center,
-            notchAndCornersAnimation:curve,
-            activeIndex: _currentSelectedTab,
-            onTap: _onItemTapped,
-            notchSmoothness: NotchSmoothness.verySmoothEdge,
-            leftCornerRadius: 10,
-          ),
+      key: HomeNavigationPage.scaffoldKey,
+      body: BlocListener<UserBloc,UserState>(
+        listener: (context,state){
+          if(state is UserLoggedOut){
+            Navigator.pushReplacementNamed(context, Env.authPage);
+          }
+        },
+        child: SafeArea(
+          child: body[_currentSelectedTab],
+          right:false,
+          left: false,
+          bottom: false,
         ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar:  BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(FontAwesomeIcons.home),
+            label:AppLocalizations.of(context).translate("home", defaultText: "Home"),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(FontAwesomeIcons.shoppingBag),
+            label: AppLocalizations.of(context).translate("sales", defaultText: "Sales"),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(FontAwesomeIcons.film),
+            label: AppLocalizations.of(context).translate("videos", defaultText: "Videos"),
+          ),
+        ],
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _currentSelectedTab,
+        selectedItemColor: AppColors.accentColor1,
+        backgroundColor: Theme.of(context).cardColor,
+        onTap: _onItemTapped,
       ),
     );
   }

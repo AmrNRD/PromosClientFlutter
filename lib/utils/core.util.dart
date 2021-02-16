@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:PromoMeFlutter/ui/common/skeleton.dart';
 import 'package:PromoMeFlutter/ui/style/app.colors.dart';
 import 'package:PromoMeFlutter/ui/style/app.dimens.dart';
+import 'package:PromoMeFlutter/ui/style/theme.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,28 @@ class CustomScrollBehavior extends ScrollBehavior {
     return child;
   }
 }
+String printDuration(Duration duration) {
+  String twoDigits(int n) => n.toString().padLeft(2, "0");
+  String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
+  String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
+  return "${twoDigits(duration.inHours)}:$twoDigitMinutes:$twoDigitSeconds";
+}
 
+void showInSnackBar(String value, BuildContext context, GlobalKey<ScaffoldState> scaffoldKey, {Color color}) {
+  if(color==null)
+    color=AppColors.accentColor1;
+  FocusScope.of(context).requestFocus(new FocusNode());
+  scaffoldKey.currentState?.removeCurrentSnackBar();
+  scaffoldKey.currentState.showSnackBar(new SnackBar(
+    content: new Text(
+      value,
+      textAlign: TextAlign.center,
+      style: AppTheme.headline2.copyWith(color: Colors.white),
+    ),
+    backgroundColor: color,
+    duration: Duration(seconds: 3),
+  ));
+}
 class QueryString {
   static Map parse(String query) {
     var search = RegExp('([^&=]+)=?([^&]*)');
@@ -53,13 +75,13 @@ class QueryString {
 class ImageProcessor {
   static image(
       {String url,
-      double width,
-      double height,
-      BoxFit fit,
-      String tag,
-      double offset = 0.0,
-      isVideo = false,
-      hidePlaceHolder = false}) {
+        double width,
+        double height,
+        BoxFit fit,
+        String tag,
+        double offset = 0.0,
+        isVideo = false,
+        hidePlaceHolder = false}) {
     if (height == null && width == null) {
       width = 200;
     }
@@ -124,14 +146,14 @@ class ImageProcessor {
   }
 
   Widget customImage(
-    BuildContext context,
-    String path, {
-    double height = 50,
-    bool isBorder = false,
-  }) {
+      BuildContext context,
+      String path, {
+        double height = 50,
+        bool isBorder = false,
+      }) {
     return Container(
       child: ClipRRect(
-          borderRadius: BorderRadius.circular(100.0),
+          borderRadius: BorderRadius.circular(20.0),
           child: CachedNetworkImage(
             imageUrl: path ?? Env.dummyProfilePic,
             fit: BoxFit.cover,

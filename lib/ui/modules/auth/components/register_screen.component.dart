@@ -4,7 +4,9 @@ import 'dart:io';
 import 'package:PromoMeFlutter/bloc/user/user_bloc.dart';
 import 'package:PromoMeFlutter/ui/common/custom_raised_button.dart';
 import 'package:PromoMeFlutter/ui/common/form.input.dart';
+import 'package:PromoMeFlutter/ui/common/loading_button.dart';
 import 'package:PromoMeFlutter/utils/validators.dart';
+import 'package:badges/badges.dart';
 // import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -84,126 +86,140 @@ class _RegisterScreenState extends State<RegisterScreen> {
             backgroundColor: AppColors.accentColor1,
           ));
         }
+
       },
-      child: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: AppDimens.marginEdgeCase24),
-          margin: EdgeInsets.only(top: AppDimens.paddingEdgeCase40),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(top: 138),
-                  child: Hero(tag: "Logo", child: Image.asset("assets/images/logo.png",height: screenAwareSize(100, context),width: screenAwareWidth(100, context))),
-                ),
-
-                SizedBox(height: AppDimens.marginDefault12),
-
-                Text(AppLocalizations.of(context).translate("welcome"), style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 25, fontWeight: FontWeight.bold)),
-
-                Padding(
-                  padding: const EdgeInsets.only(top: AppDimens.marginDefault4),
-                  child: Text(AppLocalizations.of(context).translate("please_sign_in_to_continue"), style: Theme.of(context).textTheme.subtitle1),
-                ),
-
-                SizedBox(height: AppDimens.marginEdgeCase24),
-
-                //name
-                FormInputField(title: "name", focusNode: _nameFocusNode, onSave: (value) => _authData['name'] = value,validator:(value)=>Validator(context).isNotEmpty(value) ,nextFocusNode: _emailFocusNode),
-                //email
-                FormInputField(title: "email", focusNode: _emailFocusNode, onSave: (value) => _authData['email'] = value,validator:(value)=>Validator(context).isEmail(value) ,nextFocusNode: _phoneFocusNode),
-                //phone number
-                FormInputField(title: "phone_number", focusNode: _phoneFocusNode, onSave: (value) => _authData['phone'] = value,validator:(value)=>Validator(context).isPhoneNumber(value) ,nextFocusNode: _passwordFocusNode),
-
-                //gender
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: AppDimens.marginDefault12),
-                    padding: EdgeInsets.symmetric(horizontal: AppDimens.marginSeparator8),
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).cardColor
-                    ),
-                    child: DropdownButton(
-                      isExpanded: true,
-                      underline: Container(),
-                      value: _authData['gender'],
-                      dropdownColor: Theme.of(context).backgroundColor,
-                      hint: Text(AppLocalizations.of(context).translate("gender")) ,
-                      items: [
-                        DropdownMenuItem(child: Text("ذكر"), value: 'male'),
-                        DropdownMenuItem(child: Text("انثى"), value: 'female'),
-                      ],
-                      onChanged: (value) {setState(() {_authData['gender'] = value;});
-                      }),
-                ),
-
-                //gender
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: AppDimens.marginDefault12),
-                  padding: EdgeInsets.symmetric(horizontal: AppDimens.marginSeparator8),
-                  decoration: BoxDecoration(
-                      color: Theme.of(context).cardColor
-                  ),
-                  child: DropdownButton(
-                      isExpanded: true,
-                      underline: Container(),
-                      value: _authData['city'],
-                      dropdownColor: Theme.of(context).backgroundColor,
-                      hint: Text(AppLocalizations.of(context).translate("city")) ,
-                      items: [
-                        DropdownMenuItem(child: Text("القاهرة"), value: 'Cairo'),
-                        DropdownMenuItem(child: Text("الجيزة"), value: 'Giza'),
-                        DropdownMenuItem(child: Text("الأسكندرية"), value: 'Alexandria'),
-                        DropdownMenuItem(child: Text("البحر الأحمر"), value: 'Red Sea'),
-                        DropdownMenuItem(child: Text("الدقهلية"), value: 'Dakahlia'),
-                        DropdownMenuItem(child: Text("البحيرة"), value: 'Beheira'),
-                        DropdownMenuItem(child: Text("الفيوم"), value: 'Fayoum'),
-                        DropdownMenuItem(child: Text("الغربية"), value: 'Gharbiya'),
-                        DropdownMenuItem(child: Text("الإسماعلية"), value: 'Ismailia'),
-                        DropdownMenuItem(child: Text("المنوفية"), value: 'Monofia'),
-                        DropdownMenuItem(child: Text("المنيا"), value: 'Minya'),
-                        DropdownMenuItem(child: Text("القليوبية"), value: 'Qaliubiya'),
-                        DropdownMenuItem(child: Text("الوادي الجديد"), value: 'New Valley'),
-                        DropdownMenuItem(child: Text("السويس"), value: 'Suez'),
-                        DropdownMenuItem(child: Text("اسوان"), value: 'Aswan'),
-                        DropdownMenuItem(child: Text("اسيوط"), value: 'Assiut'),
-                        DropdownMenuItem(child: Text("بني سويف"), value: 'Beni Suef'),
-                        DropdownMenuItem(child: Text("بورسعيد"), value: 'Port Said'),
-                        DropdownMenuItem(child: Text("دمياط"), value: 'Damietta'),
-                        DropdownMenuItem(child: Text("الشرقية"), value: 'Sharkia'),
-                        DropdownMenuItem(child: Text("جنوب سيناء"), value: 'South Sinai'),
-                        DropdownMenuItem(child: Text("كفر الشيخ"), value: 'Kafr Al sheikh'),
-                        DropdownMenuItem(child: Text("مطروح"), value: 'Matrouh'),
-                        DropdownMenuItem(child: Text("قنا"), value: 'Qena'),
-                        DropdownMenuItem(child: Text("شمال سيناء"), value: 'North Sinai'),
-                        DropdownMenuItem(child: Text("سوهاج"), value: 'Sohag'),
-                      ],
-                      onChanged: (value) {setState(() {_authData['city'] = value;});
-                      }),
-                ),
-
-
-
-                //password
-                FormInputField(
-                  title: "password",
-                  focusNode: _passwordFocusNode,
-                  onSave: (value) => _authData['password'] = value,
-                  isRequired: true,
-                  obscureText: _obscureTextLogin,
-                  suffixIcon: GestureDetector(
-                    onTap: () => setState(() {_obscureTextLogin = !_obscureTextLogin;}),
-                    child: Icon(_obscureTextLogin ? FontAwesomeIcons.eyeSlash : FontAwesomeIcons.eye, size: 15.0, color: Colors.grey)
-                  ),
-                ),
-                SizedBox(height: AppDimens.marginEdgeCase32),
-                Center(child: CustomRaisedButton(label: AppLocalizations.of(context).translate("sign_up"), onPress: onLogin, isLoading: reqStatus == 1)),
-                Center(child: FlatButton(onPressed: widget.goToLogin, child: Text(AppLocalizations.of(context).translate("already have account"), style: Theme.of(context).textTheme.subtitle1))),
-              ],
+      child:   SingleChildScrollView(
+        child: Column(
+          children: [
+            Center(child: Hero(tag: "Logo", child: Image.asset("assets/images/logo.png",height: screenAwareSize(100, context),width: screenAwareWidth(100, context)))),
+            SizedBox(height: AppDimens.marginDefault12),
+            Text(AppLocalizations.of(context).translate("welcome"), style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 25, fontWeight: FontWeight.bold)),
+            Padding(
+              padding: const EdgeInsets.only(top: AppDimens.marginDefault4),
+              child: Text(AppLocalizations.of(context).translate("please_sign_in_to_continue"), style: Theme.of(context).textTheme.subtitle1),
             ),
-          ),
+            Card(
+              color: Theme.of(context).cardColor,
+              elevation: 1,
+              margin: EdgeInsets.all(15),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal:10),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      SizedBox(height: 20),
+                      SizedBox(height: AppDimens.marginEdgeCase24),
+                      //name
+                      FormInputField(title: "name", focusNode: _nameFocusNode, onSave: (value) => _authData['name'] = value,validator:(value)=>Validator(context).isNotEmpty(value) ,nextFocusNode: _emailFocusNode,outterBorder: true, useLabel: true,),
+                      //email
+                      FormInputField(title: "email", focusNode: _emailFocusNode, onSave: (value) => _authData['email'] = value,validator:(value)=>Validator(context).isEmail(value) ,nextFocusNode: _phoneFocusNode,outterBorder: true, useLabel: true,),
+                      //phone number
+                      FormInputField(title: "phone_number", focusNode: _phoneFocusNode, onSave: (value) => _authData['phone'] = value,validator:(value)=>Validator(context).isPhoneNumber(value) ,nextFocusNode: _passwordFocusNode,outterBorder: true, useLabel: true,),
+
+                      //gender
+                      Container(
+                        margin: EdgeInsets.symmetric(vertical: AppDimens.marginDefault12),
+                        padding: EdgeInsets.symmetric(horizontal: AppDimens.marginSeparator8),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).cardColor,
+                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                          border: Border.all(
+                            width: 1,
+                            color: Theme.of(context).textTheme.headline3.color,
+                          ),
+                        ),
+                        child: DropdownButton(
+                            isExpanded: true,
+                            underline: Container(),
+                            value: _authData['gender'],
+                            dropdownColor: Theme.of(context).backgroundColor,
+                            hint: Text(AppLocalizations.of(context).translate("gender")) ,
+                            items: [
+                              DropdownMenuItem(child: Text("ذكر"), value: 'male'),
+                              DropdownMenuItem(child: Text("انثى"), value: 'female'),
+                            ],
+                            onChanged: (value) {setState(() {_authData['gender'] = value;});
+                            }),
+                      ),
+
+                      Container(
+                        margin: EdgeInsets.symmetric(vertical: AppDimens.marginDefault12),
+                        padding: EdgeInsets.symmetric(horizontal: AppDimens.marginSeparator8),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).cardColor,
+                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                          border: Border.all(
+                            width: 1,
+                            color: Theme.of(context).textTheme.headline3.color,
+                          ),
+                        ),
+                        child: DropdownButton(
+                            isExpanded: true,
+                            underline: Container(),
+                            value: _authData['city'],
+                            dropdownColor: Theme.of(context).backgroundColor,
+                            hint: Text(AppLocalizations.of(context).translate("city")) ,
+                            items: [
+                              DropdownMenuItem(child: Text("القاهرة"), value: 'Cairo'),
+                              DropdownMenuItem(child: Text("الجيزة"), value: 'Giza'),
+                              DropdownMenuItem(child: Text("الأسكندرية"), value: 'Alexandria'),
+                              DropdownMenuItem(child: Text("البحر الأحمر"), value: 'Red Sea'),
+                              DropdownMenuItem(child: Text("الدقهلية"), value: 'Dakahlia'),
+                              DropdownMenuItem(child: Text("البحيرة"), value: 'Beheira'),
+                              DropdownMenuItem(child: Text("الفيوم"), value: 'Fayoum'),
+                              DropdownMenuItem(child: Text("الغربية"), value: 'Gharbiya'),
+                              DropdownMenuItem(child: Text("الإسماعلية"), value: 'Ismailia'),
+                              DropdownMenuItem(child: Text("المنوفية"), value: 'Monofia'),
+                              DropdownMenuItem(child: Text("المنيا"), value: 'Minya'),
+                              DropdownMenuItem(child: Text("القليوبية"), value: 'Qaliubiya'),
+                              DropdownMenuItem(child: Text("الوادي الجديد"), value: 'New Valley'),
+                              DropdownMenuItem(child: Text("السويس"), value: 'Suez'),
+                              DropdownMenuItem(child: Text("اسوان"), value: 'Aswan'),
+                              DropdownMenuItem(child: Text("اسيوط"), value: 'Assiut'),
+                              DropdownMenuItem(child: Text("بني سويف"), value: 'Beni Suef'),
+                              DropdownMenuItem(child: Text("بورسعيد"), value: 'Port Said'),
+                              DropdownMenuItem(child: Text("دمياط"), value: 'Damietta'),
+                              DropdownMenuItem(child: Text("الشرقية"), value: 'Sharkia'),
+                              DropdownMenuItem(child: Text("جنوب سيناء"), value: 'South Sinai'),
+                              DropdownMenuItem(child: Text("كفر الشيخ"), value: 'Kafr Al sheikh'),
+                              DropdownMenuItem(child: Text("مطروح"), value: 'Matrouh'),
+                              DropdownMenuItem(child: Text("قنا"), value: 'Qena'),
+                              DropdownMenuItem(child: Text("شمال سيناء"), value: 'North Sinai'),
+                              DropdownMenuItem(child: Text("سوهاج"), value: 'Sohag'),
+                            ],
+                            onChanged: (value) {setState(() {_authData['city'] = value;});
+                            }),
+                      ),
+                      //password
+                      FormInputField(
+                        title: "password",
+                        focusNode: _passwordFocusNode,
+                        onSave: (value) => _authData['password'] = value,
+                        isRequired: true,
+                        obscureText: _obscureTextLogin,
+                        suffixIcon: GestureDetector(
+                            onTap: () => setState(() {_obscureTextLogin = !_obscureTextLogin;}),
+                            child: Icon(_obscureTextLogin ? FontAwesomeIcons.eyeSlash : FontAwesomeIcons.eye, size: 15.0, color: Colors.grey)
+                        ),
+                        outterBorder: true,
+                        useLabel: true,
+                        onFieldSubmitted: onLogin,
+                      ),
+                      SizedBox(height: AppDimens.marginEdgeCase32),
+                      Center(child: LoadingButton(title: "sign_up", onPressed: onLogin, status: reqStatus)),
+                      SizedBox(height: 20),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+            Center(child: FlatButton(onPressed: widget.goToLogin, child: Text(AppLocalizations.of(context).translate("already have account"), style: Theme.of(context).textTheme.subtitle1))),
+          ],
         ),
       ),
     );

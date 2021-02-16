@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:PromoMeFlutter/bloc/post/post_bloc.dart';
 import 'package:PromoMeFlutter/bloc/store/store_bloc.dart';
+import 'package:PromoMeFlutter/ui/common/custom_appbar.dart';
 import 'package:PromoMeFlutter/ui/common/genearic.state.component.dart';
 import 'package:PromoMeFlutter/ui/common/store.card.dart';
 import 'package:PromoMeFlutter/ui/style/app.colors.dart';
@@ -13,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_indicator_view/loading_indicator_view.dart';
-import 'package:qr_flutter/qr_flutter.dart';
+import 'package:shimmer/shimmer.dart';
 
 
 class StoreTab extends StatefulWidget {
@@ -33,21 +34,25 @@ class _StoreTabState extends State<StoreTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: CustomAppBar(),
         body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
               children: [
                 SizedBox(height: 20),
-                Text(
-                  AppLocalizations.of(context).translate("sale_items"),
-                  style: Theme.of(context).textTheme.headline1.copyWith(fontWeight: FontWeight.w500),
-                ),
-                SizedBox(height: 20),
                 Container(
                   child:BlocBuilder<StoreBloc,StoreState>(
                     builder: (context,state){
                       if(state is SaleItemLoading){
-                        return Container(margin: EdgeInsets.all(30),alignment: Alignment.center,child: SemiCircleSpinIndicator(color: Theme.of(context).accentColor));
+                        return Container(margin: EdgeInsets.all(30),alignment: Alignment.center,child:Shimmer.fromColors(
+                          baseColor: AppColors.primaryColor,
+                          highlightColor: AppColors.white,
+                          child: Image.asset(
+                            "assets/images/logo2.png",
+                            height: screenAwareSize(70, context),
+                            width: screenAwareWidth(70, context),
+                          ),
+                        ),);
                       } else if(state is SaleItemsLoaded){
                         if (state.saleItems.isEmpty) {
                           return Container(

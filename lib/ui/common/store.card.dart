@@ -14,7 +14,7 @@ class SaleItemCard extends StatelessWidget {
   const SaleItemCard({Key key, @required this.saleItem}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-   return Container(
+    return Container(
       margin: EdgeInsetsDirectional.only(top: 10, bottom: 24),
       width: 250,
       decoration: BoxDecoration(
@@ -40,6 +40,7 @@ class SaleItemCard extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+
                   Container(
                     height: 160,
                     child:CachedNetworkImage(
@@ -107,28 +108,19 @@ class SaleItemCard extends StatelessWidget {
               top: 140,
               end:20,
               child: Container(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).cardColor,
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 20,
-                      offset: Offset(0, 4),
-                      color: Colors.black.withOpacity(0.2),
-                    ),
-                  ],
-                ),
-                child: Container(
                   height: 56,
                   width: 56,
-                  padding: EdgeInsets.all(14),
-                  child:  CachedNetworkImage(
-                    imageUrl: saleItem.user.image??Env.dummyProfilePic,
-                    fit: BoxFit.fill,
-                    height: 56,
-                    width: 56,
-                    errorWidget: (context, url, error) => CachedNetworkImage(imageUrl: Env.dummyProfilePic),
+                  padding: EdgeInsets.all(5),
+                  child:  ClipRRect(
+                    borderRadius: BorderRadius.circular(10.0),
+                    child: CachedNetworkImage(
+                      imageUrl: saleItem.user.image??Env.dummyProfilePic,
+                      fit: BoxFit.fill,
+                      height: 56,
+                      width: 56,
+                      errorWidget: (context, url, error) => CachedNetworkImage(imageUrl: Env.dummyProfilePic),
+                    ),
                   )
-                ),
               ),
             ),
           ],

@@ -55,11 +55,11 @@ class UserDataRepository implements UserRepository {
 
   @override
   Future<User> login(String email, String password,  String platform,String firebaseToken) async {
-    final responseData = await APICaller.postData("/auth/login", body: {"email":email, "password":password,"firebase_token":firebaseToken, "platform":platform,"type":"user"});
+    final responseData = await APICaller.postData("/auth/login", body: {"email":email, "password":password,"firebase_token":firebaseToken, "platform":platform,"type":"company"});
     User user = User.fromJson(responseData['user']);
     DateTime _expiryDate = DateTime.parse(responseData['expires_at']);
     final prefs = await SharedPreferences.getInstance();
-    prefs.setString('userData', json.encode(user));
+    prefs.setString('userData', jsonEncode(user.toJson()));
     prefs.setString('token', 'Bearer ' + responseData['access_token']);
     prefs.setString('expiryDate', _expiryDate.toIso8601String());
     prefs.setBool('loggedIn', true);
@@ -79,10 +79,13 @@ class UserDataRepository implements UserRepository {
 
   @override
   Future<User> update(User updatedUser) async {
+    var map=updatedUser.toUpdateJson();
+    if(Root.user.mobile==updatedUser.mobile)
+      map.remove("mobile");
     final prefs = await SharedPreferences.getInstance();
-    final responseData = await APICaller.postData("/update-user-data", body: updatedUser.toUpdateJson(),authorizedHeader: true);
+    final responseData = await APICaller.postData("/update-user-profile", body: map,authorizedHeader: true);
     User user = User.fromJson(responseData['user']);
-    prefs.setString('userData', json.encode(user));
+    prefs.setString('userData', jsonEncode(user.toJson()));
     return user;
   }
 
@@ -91,7 +94,7 @@ class UserDataRepository implements UserRepository {
     final prefs = await SharedPreferences.getInstance();
     final responseData = await APICaller.postData("/update-user-profile-picture", body: {"photo": photo, "name": name,},authorizedHeader: true);
     User user = User.fromJson(responseData['user']);
-    prefs.setString('userData', json.encode(user));
+    prefs.setString('userData', jsonEncode(user.toJson()));
     return user;
   }
 
@@ -100,7 +103,7 @@ class UserDataRepository implements UserRepository {
     final prefs = await SharedPreferences.getInstance();
     final responseData = await APICaller.postData("/auth/user",body: {'firebase_token':firebaseToken}, authorizedHeader: true);
     User user = User.fromJson(responseData['user']);
-    prefs.setString('userData', json.encode(user));
+    prefs.setString('userData', jsonEncode(user.toJson()));
     return user;
   }
 

@@ -1,6 +1,9 @@
 import 'package:PromoMeFlutter/env.dart';
+import 'package:PromoMeFlutter/utils/app.localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '../../main.dart';
 
 class FormPageTitle extends StatelessWidget {
   final String title;
@@ -27,33 +30,34 @@ class FormPageTitle extends StatelessWidget {
             flex: 1,
             child: backButton
                 ? GestureDetector(
-                    onTap: () {
-                      if (backButtonFunction == null) {
-                        Navigator.canPop(context)?Navigator.pop(context):Navigator.of(context).pushReplacementNamed(Env.homePage);
-                      } else {
-                        backButtonFunction();
-                      }
-                    },
-                    child: Container(
-                      height: 40,
-                      color: Colors.transparent,
-                      child: SizedBox(
-                        height: 30,
-                        width: 30,
-                        child: Icon(
-                          FontAwesomeIcons.arrowLeft,
-                          color: customBackButtonColor ?? Theme.of(context).textTheme.headline3.color,
-                        ),
-                      ),
-                    ),
-                  )
+              onTap: () {
+                if (backButtonFunction == null) {
+                  Navigator.canPop(context)?Navigator.pop(context):Navigator.of(context).pushReplacementNamed(Env.homePage);
+                } else {
+                  backButtonFunction();
+                }
+              },
+              child: Container(
+                height: 40,
+                color: Colors.transparent,
+                child: SizedBox(
+                  height: 30,
+                  width: 30,
+                  child: Icon(
+                    Root.locale == Locale('ar')
+                        ? FontAwesomeIcons.arrowRight:FontAwesomeIcons.arrowLeft,
+                    color: customBackButtonColor ?? Theme.of(context).textTheme.headline3.color,
+                  ),
+                ),
+              ),
+            )
                 : Container(),
           ),
           Expanded(
             flex: 9,
             child: Container(
               child: Text(
-                title,
+                AppLocalizations.of(context).translate(title,defaultText:title),
                 style: customTitleStyle != null
                     ? customTitleStyle
                     : Theme.of(context).textTheme.headline1,
@@ -64,40 +68,40 @@ class FormPageTitle extends StatelessWidget {
           actionArea != null
               ? actionArea
               : Flexible(
-                flex: actionButton && secondActionButton ? 2 : 1,
-                child: Row(
-                  children: [
-                    secondActionButton
-                        ? GestureDetector(
-                            onTap: secondActionButtonFunction,
-                            child: Container(
-                              color: Colors.transparent,
-                              height: 40,
-                              child: SizedBox(
-                                height: 30,
-                                width: 30,
-                                child: Icon(Icons.history, color: customBackButtonColor ?? Theme.of(context).textTheme.headline3.color),
-                              ),
-                            ),
-                          )
-                        : Container(),
-                    actionButton
-                        ? GestureDetector(
-                            onTap: actionFunction,
-                            child: Container(
-                              color: Colors.transparent,
-                              height: 40,
-                              child: SizedBox(
-                                height: 30,
-                                width: 30,
-                                child: Icon(Icons.add, color: customBackButtonColor ?? Theme.of(context).textTheme.headline3.color),
-                              ),
-                            ),
-                          )
-                        : Container(),
-                  ],
-                ),
-              ),
+            flex: actionButton && secondActionButton ? 2 : 1,
+            child: Row(
+              children: [
+                secondActionButton
+                    ? GestureDetector(
+                  onTap: secondActionButtonFunction,
+                  child: Container(
+                    color: Colors.transparent,
+                    height: 40,
+                    child: SizedBox(
+                      height: 30,
+                      width: 30,
+                      child: Icon(Icons.history, color: customBackButtonColor ?? Theme.of(context).textTheme.headline3.color),
+                    ),
+                  ),
+                )
+                    : Container(),
+                actionButton
+                    ? GestureDetector(
+                  onTap: actionFunction,
+                  child: Container(
+                    color: Colors.transparent,
+                    height: 40,
+                    child: SizedBox(
+                      height: 30,
+                      width: 30,
+                      child: Icon(Icons.add, color: customBackButtonColor ?? Theme.of(context).textTheme.headline3.color),
+                    ),
+                  ),
+                )
+                    : Container(),
+              ],
+            ),
+          ),
         ],
       ),
     );
