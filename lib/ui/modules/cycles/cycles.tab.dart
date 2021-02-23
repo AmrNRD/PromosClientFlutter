@@ -18,6 +18,7 @@ import 'package:flutter_stories/flutter_stories.dart';
 import 'package:loading_indicator_view/loading_indicator_view.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../../env.dart';
 import '../../../main.dart';
 
 
@@ -40,7 +41,22 @@ class _CyclesTabState extends State<CyclesTab> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
-        appBar: CustomAppBar(),
+        appBar: CustomAppBar(
+          actionButtons: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+              child: RaisedButton(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                  color: Color(0xFFF0483D),
+                  child: Text(
+                    AppLocalizations.of(context).translate("points",replacement: (Root.user.points??0).toString()),
+                    style: Theme.of(context).textTheme.headline2.copyWith(color: Colors.white),
+                  ),
+                  onPressed: () {Navigator.pushNamed(context, Env.sideMenuPage);}
+              ),
+            ),
+          ],
+        ),
         body: SafeArea(
           child: SingleChildScrollView(
             child: Container(

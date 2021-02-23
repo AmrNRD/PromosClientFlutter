@@ -20,6 +20,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loading_indicator_view/loading_indicator_view.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../../env.dart';
+import '../../../main.dart';
+
 
 class HomeTabPage extends StatefulWidget {
   @override
@@ -49,7 +52,18 @@ class _HomeTabPageState extends State<HomeTabPage> {
       key: _scaffoldKey,
       appBar: CustomAppBar(
         actionButtons: [
-
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+            child: RaisedButton(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                color: Color(0xFFF0483D),
+                child: Text(
+                  AppLocalizations.of(context).translate("points",replacement: (Root.user.points??0).toString()),
+                  style: Theme.of(context).textTheme.headline2.copyWith(color: Colors.white),
+                ),
+                onPressed: () {Navigator.pushNamed(context, Env.sideMenuPage);}
+            ),
+          ),
         ],
       ),
       backgroundColor: Theme.of(context).backgroundColor,

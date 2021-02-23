@@ -26,8 +26,6 @@ class _CommentsSheetState extends State<CommentsSheet> {
   void initState() {
     super.initState();
     _textEditingController=new TextEditingController();
-    print(Root.user.id);
-    print(widget.selectedPost.comments[1].user.id);
   }
   @override
   Widget build(BuildContext context) {

@@ -28,7 +28,7 @@
     "product_value": "VALUE OF ITEMS",
     "order_product": "Products",
     "currency": "EGP %s",
-    "points": "Points: %s",
+    "points": "Points %s",
     "status": "Status",
     "payment": "Payment",
     "total_items": "Total items: %s",
